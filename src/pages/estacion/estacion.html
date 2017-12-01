@@ -1,0 +1,55 @@
+<!--
+  Generated template for the EstacionPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{nombreEstacion}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="weather" padding>
+    <i class="pe-7s-home"></i>
+	<ion-grid class="current-info">
+        <ion-row margin-top>
+            <ion-col class="temperature-col">
+                <div class="temperature">
+                    <!-- {{ current.temp_c }} -->
+                </div>
+            </ion-col>
+            <ion-col class="icon-col">
+                <ion-row>
+                    <ion-icon class="celsius-icon" name="wi-celsius"></ion-icon>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+        <ion-row class="condition-text">
+            <ion-col>
+                <div>
+                    <!-- {{ current.condition.text }}  -->
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                Real Feel <!-- {{ current.feelslike_c }} -->
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <!-- LISTA DE VARIABLES -->
+  <ion-list>
+    <button ion-item *ngFor="let variable of variablesEstacion">
+      <!-- <ion-icon name="cube" item-start></ion-icon> -->
+      
+      <h2>{{ variable.nombre | uppercase }}</h2>
+      <p>{{variable.valor}}{{variable.unidad}}</p>
+    </button>
+  </ion-list>
+  <!-- END LISTA DE VARIABLES -->
+</ion-content>

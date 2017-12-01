@@ -1,0 +1,22 @@
+androi
+AIzaSyDRD1CKq4LxvyPISBTzXiZzCClb7f3ED0A
+
+ios
+AIzaSyBMVWDy8tglINGDwhTtKXgE1HuXieijidQ
+
+$ ionic cordova plugin add cordova-plugin-googlemaps --variable API_KEY_FOR_ANDROID="AIzaSyDRD1CKq4LxvyPISBTzXiZzCClb7f3ED0A" --variable API_KEY_FOR_IOS="AIzaSyBMVWDy8tglINGDwhTtKXgE1HuXieijidQ"
+$ npm install --save @ionic-native/google-maps
+
+WEB
+AIzaSyBGWpMyBJyCIxWsqDF5eMLVMvBI2lNLW-U
+
+Maps JavaScript API
+AIzaSyA33DcEr9wo4nvL-792zHcw3o-ls12dnAs
+
+
+
+
+
+
+
+ionic cordova plugin add cordova-plugin-googlemaps --variable API_KEY_FOR_ANDROID="AIzaSyAMinsLfVxE4VvCRExgXiJEuEsGelBTFX4" --variable API_KEY_FOR_IOS="AIzaSyDXrzoeIs6klvwsmY6ikC3rKsUBTfwFDRU"

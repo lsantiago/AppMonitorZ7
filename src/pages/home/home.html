@@ -1,11 +1,42 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>Estaciones</ion-title>
   </ion-navbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar (input)="getItems($event)"></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
+  
+
+  <!-- LISTA DE ESTACIONES -->
+  <ion-list>
+    <button ion-item *ngFor="let item of items" (click)="getEstacion(item.codigo)">
+      <ion-icon name="cube" item-start></ion-icon>  
+      
+      <h2>{{ item.nombre | uppercase }}</h2>
+      <p>Ultima actualización: {{ item.ultimaActualizacion }}</p>
+      <!-- <p>{{ item.latitud }} {{ item.longitud }}</p> -->
+    </button>
+  </ion-list>
+  <!-- END LISTA DE ESTACIONES -->
+  
+  <!--
+  
+  <h2>Lista de usuarios!</h2>
+  <ion-list>
+    <ion-item *ngFor="let user of users">
+      <ion-avatar item-start>
+        <img [src]="user.picture.medium">
+      </ion-avatar>
+      <h2>{{ user.name.first | uppercase }}</h2>
+      <p>{{ user.email }}</p>
+    </ion-item>
+  </ion-list>
+
+  
+  
   <p>
     This starter project comes with simple tabs-based layout for apps
     that are going to primarily use a Tabbed UI.
@@ -14,4 +45,5 @@
     Take a look at the <code>src/pages/</code> directory to add or change tabs,
     update any existing page or create new pages.
   </p>
+  -->
 </ion-content>

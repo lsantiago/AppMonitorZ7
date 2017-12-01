@@ -2,5 +2,13 @@
   "name": "AppMonitorZ7",
   "app_id": "",
   "type": "ionic-angular",
-  "integrations": {}
+  "integrations": {
+    "cordova": {}
+  },
+  "proxies": [
+    {
+      "path": "/platform",
+      "proxyUrl": "http://200.0.29.38:8080/platform"
+    }
+  ]
 }

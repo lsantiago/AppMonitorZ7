@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { EstacionProvider } from '../../providers/estacion/estacion';
 
 @Component({
   selector: 'page-about',
@@ -7,8 +8,8 @@ import { NavController } from 'ionic-angular';
 })
 export class AboutPage {
 
-  constructor(public navCtrl: NavController) {
-
+  constructor(public navCtrl: NavController, public estacionService: EstacionProvider) {
+  	console.log(this.estacionService.listaEstaciones);
   }
 
 }

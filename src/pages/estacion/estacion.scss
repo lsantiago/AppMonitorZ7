@@ -1,0 +1,48 @@
+page-estacion {
+	.weather{
+		background-image: url('../assets/imgs/background.png');
+		background-size: cover;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+
+        .scroll-content {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .current-info {
+            color: white;
+
+            ion-col {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .temperature-col {
+                align-items: flex-end;
+
+                .temperature {
+                    font-size: 8rem;
+                }
+            }
+
+            .icon-col {
+                align-items: flex-start;
+
+                .celsius-icon {
+                    &::before {
+                        font-size: 5rem;   
+                    }
+                }
+            }
+
+            .condition-text {
+                .weather-icon {
+                    &::before {
+                        font-size: 1.5rem;   
+                    }
+                }
+            }
+        }
+	}
+}
