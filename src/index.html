@@ -19,11 +19,15 @@
   <script src="cordova.js"></script>
 
   <!-- ICONOS VARIABLES -->
-  <link rel="stylesheet" href="pe-icon-7-stroke/css/pe-icon-7-stroke.css">
+  <link rel="stylesheet" href="assets/icon/pe-icon-7-stroke/css/pe-icon-7-stroke.css">
   <!-- END ICONOS VARIABLES -->
 
   <!-- GOOGLE MAPS -->
-  <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCreNwRb6zzion2MU6mWXOibRQbuNXFef4" asyn defer></script>-->
+  <!-- google maps script is loaded last as to not block rendering -->
+  
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCS-DWFyyjAQNZ86ks6H24N6mE59oH9zIg"></script>
+  <script src="assets/js/markerclusterer.js"></script>
+  
   <!-- END GOOGLE MAPS -->
 
   <!-- un-comment this code to enable service worker

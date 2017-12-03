@@ -1,6 +1,20 @@
 page-estacion {
-	.weather{
-		background-image: url('../assets/imgs/background.png');
+	
+    .posts-load-spinner {
+        position: absolute;
+        margin: auto;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        * {
+          stroke: color($colors, primary);
+        }
+    }
+
+    .weather{
+		background-image: url('../assets/imgs/bg1.jpg');
 		background-size: cover;
         background-position: 50% 50%;
         background-repeat: no-repeat;

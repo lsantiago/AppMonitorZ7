@@ -1,6 +1,6 @@
 {
   "name": "AppMonitorZ7",
-  "app_id": "",
+  "app_id": "286cceda",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}

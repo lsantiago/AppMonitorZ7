@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { EstacionProvider } from '../../providers/estacion/estacion';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { HistoriaPage } from '../historia/historia';
 
 /**
  * Generated class for the EstacionPage page.
@@ -15,6 +16,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'estacion.html',
 })
 export class EstacionPage {
+  loadCompleted: boolean = false;
   private variablesEstacion: any = [];
   private codigoEstacion: string;
   private datosEstacion: any = [];
@@ -38,6 +40,10 @@ export class EstacionPage {
     console.log('ionViewDidLoad EstacionPage');
   }
 
+  getHistoria(codigoEstacion, codigoVariable){
+    this.navCtrl.push(HistoriaPage, {codigoEstacion, codigoVariable})
+  }
+
   // Obtiene la lista de estaciones
   getDatosEstacion(codigoEstacion: string) {
     this.estacionService.getDetalleEstacion(codigoEstacion).subscribe(data => { // Success
@@ -45,11 +51,12 @@ export class EstacionPage {
         this.variablesEstacion = this.datosEstacion.variables;
 
         console.log('Primera variable: ' + this.variablesEstacion[0].nombre);
-
       },
       (error) => {
         console.error(error);
       })
+
+      this.loadCompleted = true;
   }
 
 }

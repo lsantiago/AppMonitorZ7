@@ -18,10 +18,13 @@ import 'rxjs/add/operator/catch';
   */
   @Injectable()
   export class EstacionProvider {
+    
     listaEstaciones: any = []
     private urlEstaciones: string = "platform/api/public/meteorological";
     private urlDetalleEstacion: string = 'platform/api/public/meteorological/detail/';
-    private urlVariablesEstacion: string;
+    
+    //private urlHistoriaVariable: string = 'platform/api/variableHistoricos/detail/';
+    private urlHistoriaVariable: string = 'assets/data/data.json';
     
 
     constructor(public http: HttpClient) {
@@ -38,6 +41,15 @@ import 'rxjs/add/operator/catch';
       return this.http.get(this.urlDetalleEstacion + codigo + '/codigo')
       .do(res => console.log(res));
     }
+
+    getHistoriaVariable(codEstacion: string, codVariable: string){
+     /*return this.http.get(this.urlHistoriaVariable + codEstacion + '/' +
+       codVariable)
+     .do(res => console.log(res)); */
+     return this.http.get(this.urlHistoriaVariable);
+    }
+
+    
 
     // Obtiene todas las estaciones del API REST
     getEstaciones() {

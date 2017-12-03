@@ -1,9 +1,28 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Estaciones</ion-title>
+  <ion-navbar no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-segment>
+      <ion-segment-button value="all">
+        Todos
+      </ion-segment-button>
+      <ion-segment-button value="favorites">
+        Favoritos
+      </ion-segment-button>
+    </ion-segment>
+    
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon ios="ios-options-outline" md="md-options"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-  <ion-toolbar color="primary">
-    <ion-searchbar (input)="getItems($event)"></ion-searchbar>
+  
+  
+  <ion-toolbar no-border-top>
+    <ion-searchbar color="primary" (input)="getItems($event)" placeholder = "Buscar"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
@@ -12,15 +31,53 @@
 
   <!-- LISTA DE ESTACIONES -->
   <ion-list>
+
+    <ion-item-sliding *ngFor="let item of items">
+
+        <button ion-item (click)="getEstacion(item.codigo)">
+          <h3><ion-icon name="cube" item-start></ion-icon>{{item.nombre}}</h3>
+          <p>
+            Topico: {{item.topico}} &mdash;
+            {{item.ultimaActualizacion}}
+          </p>
+        </button>
+
+        <ion-item-options>
+          <button ion-button color="favorite">
+            Favorito
+          </button>
+          <button ion-button color="danger">
+            Remover
+          </button>
+        </ion-item-options>
+
+      </ion-item-sliding>
+
+
+
+    <!--  
     <button ion-item *ngFor="let item of items" (click)="getEstacion(item.codigo)">
-      <ion-icon name="cube" item-start></ion-icon>  
+        
       
-      <h2>{{ item.nombre | uppercase }}</h2>
+      <h2><ion-icon name="cube" item-start></ion-icon>{{ item.nombre | uppercase }}</h2>
       <p>Ultima actualización: {{ item.ultimaActualizacion }}</p>
-      <!-- <p>{{ item.latitud }} {{ item.longitud }}</p> -->
-    </button>
+      <!-- <p>{{ item.latitud }} {{ item.longitud }}</p>
+    </button>-->
+
+
   </ion-list>
   <!-- END LISTA DE ESTACIONES -->
+  
+
+  <!-- 
+ <ion-list *ngIf="!isfiltered">
+    <ion-item *ngFor="let museum of museumList" (click)="itemTapped($event, museum)">
+      <h2><ion-icon ios="ios-pin" md="md-pin"></ion-icon>{{museum.name}}</h2>
+      <p>State name: {{museum.state}}</p>
+    </ion-item>
+  </ion-list>
+  -->
+
   
   <!--
   
@@ -46,4 +103,7 @@
     update any existing page or create new pages.
   </p>
   -->
+
+
+  
 </ion-content>

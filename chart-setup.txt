@@ -1,3 +1,37 @@
+ADD PAGE
+ionic g 
+$ ionic generate 
+$ ionic generate component
+$ ionic generate directive
+$ ionic generate page
+$ ionic generate pipe
+$ ionic generate provider
+$ ionic generate tabs
+$ ionic generate component foo
+$ ionic generate page Login
+$ ionic generate page Detail --no-module
+$ ionic generate page About --constants
+$ ionic generate pipe MyFilterPipe
+
+
+
+
+COMPILE AND RUN
+ionic cordova platform add android
+
+
+Build Android App
+ionic cordova build android
+
+
+ionic cordova emulate android -lcs
+
+ionic cordova build android
+ionic cordova emulate android | ionic cordova run android
+
+
+
+
 androi
 AIzaSyDRD1CKq4LxvyPISBTzXiZzCClb7f3ED0A
 
@@ -6,6 +40,9 @@ AIzaSyBMVWDy8tglINGDwhTtKXgE1HuXieijidQ
 
 $ ionic cordova plugin add cordova-plugin-googlemaps --variable API_KEY_FOR_ANDROID="AIzaSyDRD1CKq4LxvyPISBTzXiZzCClb7f3ED0A" --variable API_KEY_FOR_IOS="AIzaSyBMVWDy8tglINGDwhTtKXgE1HuXieijidQ"
 $ npm install --save @ionic-native/google-maps
+
+
+npm install --save "@ionic-native/google-maps"
 
 WEB
 AIzaSyBGWpMyBJyCIxWsqDF5eMLVMvBI2lNLW-U
@@ -19,4 +56,3 @@ AIzaSyA33DcEr9wo4nvL-792zHcw3o-ls12dnAs
 
 
 
-ionic cordova plugin add cordova-plugin-googlemaps --variable API_KEY_FOR_ANDROID="AIzaSyAMinsLfVxE4VvCRExgXiJEuEsGelBTFX4" --variable API_KEY_FOR_IOS="AIzaSyDXrzoeIs6klvwsmY6ikC3rKsUBTfwFDRU"

@@ -8,6 +8,7 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { MapaPage } from '../pages/mapa/mapa';
 import { EstacionPage } from '../pages/estacion/estacion';
+import { HistoriaPage } from '../pages/historia/historia';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -28,6 +29,7 @@ import { HttpModule } from '@angular/http';
     HomePage,
     MapaPage,
     EstacionPage,
+    HistoriaPage,
     TabsPage
 
   ],
@@ -45,6 +47,7 @@ import { HttpModule } from '@angular/http';
     HomePage,
     MapaPage,
     EstacionPage,
+    HistoriaPage,
     TabsPage
   ],
   providers: [
