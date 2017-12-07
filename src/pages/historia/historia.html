@@ -1,4 +1,4 @@
-<!--
+<!-- <!--
   Generated template for the HistoriaPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
@@ -6,13 +6,71 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>historia</ion-title>
-  </ion-navbar>
+	<ion-navbar>
+		<ion-title>Detalle histórico</ion-title>
+	</ion-navbar>
+
+	<ion-segment [(ngModel)]="summary">
+		<ion-segment-button value="grafico">
+			Gráfico
+		</ion-segment-button>
+		<ion-segment-button value="registros">
+			Registros
+		</ion-segment-button>
+	</ion-segment>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="weather">
+	<div [ngSwitch]="summary">
 
+		<div *ngSwitchCase="'grafico'">
+			<ion-grid class="more-info">
+				<ion-row>
+					<ion-col col-4>
+						<ion-row>
+							Descripción
+						</ion-row>
+						<ion-row>{{detalle}}</ion-row>
+					</ion-col>
+					<ion-col col-4>
+						<ion-row>
+							Mín.  / Máx.
+						</ion-row>
+						<ion-row>{{minReg}} / {{maxReg}}</ion-row>
+					</ion-col>
+					<ion-col col-4>
+						<ion-row>
+							Unidad
+						</ion-row>
+						<ion-row>
+							{{unidad}}
+						</ion-row>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+
+
+
+			<chart [options]="chartOptions" style="display: block;" type="chart" ></chart>	
+		</div>
+		
+		<ion-list *ngSwitchCase="'registros'">
+			<ion-list-header>
+				<h2>Fecha publicación </h2>
+				<ion-note item-end>
+					<h2 style="padding-right: 0.5cm">Valor({{unidad}})</h2>
+				</ion-note>
+			</ion-list-header>
+			<button ion-item *ngFor="let registro of registrosFull">
+				{{ registro.fechaPublicacion }}
+				<ion-badge color="secondary" item-end>{{ registro.valor }}</ion-badge>
+			</button>  
+		</ion-list>
+
+	</div>
+
+	
 </ion-content>
+-->

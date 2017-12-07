@@ -27,31 +27,35 @@
 </ion-header>
 
 <ion-content padding>
-  
+
 
   <!-- LISTA DE ESTACIONES -->
   <ion-list>
 
     <ion-item-sliding *ngFor="let item of items">
 
-        <button ion-item (click)="getEstacion(item.codigo)">
-          <h3><ion-icon name="cube" item-start></ion-icon>{{item.nombre}}</h3>
-          <p>
-            Topico: {{item.topico}} &mdash;
-            {{item.ultimaActualizacion}}
-          </p>
+      <button ion-item (click)="getEstacion(item.codigo)">
+        <h3><ion-icon name="cube" item-start></ion-icon>{{item.nombre}}</h3>
+        <p>
+          Topico: {{item.topico}} &mdash;
+          {{item.ultimaActualizacion}}
+        </p>
+         
+      </button>
+
+      <ion-item-options>
+        <button ion-button color="secondary">
+          Ubicar
         </button>
+        <button ion-button color="favorite">
+          Favorito
+        </button>
+        <button ion-button color="danger">
+          Remover
+        </button>
+      </ion-item-options>
 
-        <ion-item-options>
-          <button ion-button color="favorite">
-            Favorito
-          </button>
-          <button ion-button color="danger">
-            Remover
-          </button>
-        </ion-item-options>
-
-      </ion-item-sliding>
+    </ion-item-sliding>
 
 
 
@@ -62,12 +66,12 @@
       <h2><ion-icon name="cube" item-start></ion-icon>{{ item.nombre | uppercase }}</h2>
       <p>Ultima actualización: {{ item.ultimaActualizacion }}</p>
       <!-- <p>{{ item.latitud }} {{ item.longitud }}</p>
-    </button>-->
+      </button>-->
 
 
-  </ion-list>
-  <!-- END LISTA DE ESTACIONES -->
-  
+    </ion-list>
+    <!-- END LISTA DE ESTACIONES -->
+
 
   <!-- 
  <ion-list *ngIf="!isfiltered">
@@ -76,9 +80,9 @@
       <p>State name: {{museum.state}}</p>
     </ion-item>
   </ion-list>
-  -->
+-->
 
-  
+
   <!--
   
   <h2>Lista de usuarios!</h2>
@@ -102,8 +106,8 @@
     Take a look at the <code>src/pages/</code> directory to add or change tabs,
     update any existing page or create new pages.
   </p>
-  -->
+-->
 
 
-  
+
 </ion-content>

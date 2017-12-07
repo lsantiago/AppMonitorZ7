@@ -18,7 +18,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { EstacionProvider } from '../providers/estacion/estacion';
 
 import { HttpModule } from '@angular/http';
-// import { GoogleMaps } from "@ionic-native/google-maps";
+import { ChartModule } from 'angular2-highcharts'; 
+import * as highcharts from 'highcharts';
+
 
 
 @NgModule({
@@ -37,7 +39,7 @@ import { HttpModule } from '@angular/http';
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
-    HttpModule
+    HttpModule, ChartModule.forRoot(highcharts)
   ],
   bootstrap: [IonicApp],
   entryComponents: [

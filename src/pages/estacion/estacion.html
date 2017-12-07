@@ -7,54 +7,22 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{nombreEstacion}}</ion-title>
+    <ion-title>Lista de variables</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content class="weather" padding>
+<ion-content  padding>
   
   <ion-spinner *ngIf="!loadCompleted" name="crescent" class="posts-load-spinner"></ion-spinner>
 
-  
-  <!--
-	<ion-grid class="current-info">
-        <ion-row margin-top>
-            <ion-col class="temperature-col">
-                <div class="temperature">
-                    {{ current.temp_c }}
-                </div>
-            </ion-col>
-            <ion-col class="icon-col">
-                <ion-row>
-                    <ion-icon class="celsius-icon" name="wi-celsius"></ion-icon>
-                </ion-row>
-            </ion-col>
-        </ion-row>
-        <ion-row class="condition-text">
-            <ion-col>
-                <div>
-                    {{ current.condition.text }} 
-                </div>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                Real Feel {{ current.feelslike_c }}
-            </ion-col>
-        </ion-row>
-  </ion-grid> -->
-
-    <!-- LISTA DE VARIABLES -->
+  <!-- LISTA DE VARIABLES -->
   <ion-list>
     <button ion-item *ngFor="let variable of variablesEstacion" (click)="getHistoria(variable.codigoEstacion, variable.codigoVariable)">
-      <!-- <ion-icon name="cube" item-start></ion-icon> -->
-      
-
       <ion-label>
         <h2 Vertical Timeline> <i class={{variable.icono}}></i> {{ variable.nombre }}</h2>
-        <p ion-text color="secondary">{{variable.fechaRegistro}}</p>
+        <p ion-text color="dynamicColor" style="font-size: 12px;">{{variable.fechaRegistro}}</p>
       </ion-label>
       
       <ion-note item-end>
