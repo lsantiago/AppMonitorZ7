@@ -14,22 +14,29 @@
 
 
 <ion-content  padding>
-  
+
   <ion-spinner *ngIf="!loadCompleted" name="crescent" class="posts-load-spinner"></ion-spinner>
 
   <!-- LISTA DE VARIABLES -->
   <ion-list>
-    <button ion-item *ngFor="let variable of variablesEstacion" (click)="getHistoria(variable.codigoEstacion, variable.codigoVariable)">
+    <ion-item *ngFor="let variable of variablesEstacion" >
       <ion-label>
         <h2 Vertical Timeline> <i class={{variable.icono}}></i> {{ variable.nombre }}</h2>
-        <p ion-text color="dynamicColor" style="font-size: 12px;">{{variable.fechaRegistro}}</p>
+        <!-- <p ion-text color="dynamicColor" style="font-size: 12px;">{{variable.fechaRegistro}}</p> -->
       </ion-label>
       
       <ion-note item-end>
-        <p ion-text color="dark">{{variable.valor}}{{variable.unidad}}</p>
+        <button ion-button icon-only (click)="showLiveVariable(variable.codigoEstacion, variable.codigoVariable)">
+          <ion-icon name="ios-pulse-outline">
+          </ion-icon>
+        </button>
+        <button ion-button icon-only (click)="getHistoria(variable.codigoEstacion, variable.codigoVariable)">
+          <ion-icon name="list-box"></ion-icon>
+        </button>
+        <!-- <p ion-text color="dark">{{variable.valor}}{{variable.unidad}}</p> -->
       </ion-note>
       
-    </button>
+    </ion-item>
   </ion-list>
   <!-- END LISTA DE VARIABLES -->
 </ion-content>

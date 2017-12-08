@@ -17,9 +17,7 @@
 		<ion-segment-button value="registros">
 			Registros
 		</ion-segment-button>
-		<ion-segment-button value="live">
-			En vivo
-		</ion-segment-button>
+		
 	</ion-segment>
 
 </ion-header>
@@ -56,7 +54,10 @@
 
 
 
-			<chart [options]="chartOptions" style="display: block;" type="chart" ></chart>	
+			<div id="graficoHistoria" style="min-width: 310px; height: 400px; margin: 0 auto">
+			</div>	
+
+			
 		</div>
 		
 		<ion-list *ngSwitchCase="'registros'">
@@ -71,16 +72,5 @@
 				<ion-badge item-end>{{ registro.valor }}</ion-badge>
 			</button>  
 		</ion-list>
-
-		<div *ngSwitchCase="'live'">
-			<chart [options]="chartLive" style="display: block;" type="chart" ></chart>	
-
-			<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-		</div>
-
-
-	</div>
-
-	
+	</div>	
 </ion-content>
--->

@@ -10,6 +10,7 @@ import { MapaPage } from '../pages/mapa/mapa';
 import { EstacionPage } from '../pages/estacion/estacion';
 import { HistoriaPage } from '../pages/historia/historia';
 import { TabsPage } from '../pages/tabs/tabs';
+import { ChartlivePage } from '../pages/chartlive/chartlive';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -18,11 +19,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { EstacionProvider } from '../providers/estacion/estacion';
 
 import { HttpModule } from '@angular/http';
-import { ChartModule } from 'angular2-highcharts'; 
-import * as highcharts from 'highcharts';
+
 
 import { StompService } from 'ng2-stomp-service';
 
+import { AngularFireModule } from 'angularfire2';
+import { FIREBASE_CONFIG } from './app.firebase.config';
 
 
 @NgModule({
@@ -34,6 +36,7 @@ import { StompService } from 'ng2-stomp-service';
     MapaPage,
     EstacionPage,
     HistoriaPage,
+    ChartlivePage,
     TabsPage
 
   ],
@@ -41,7 +44,8 @@ import { StompService } from 'ng2-stomp-service';
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
-    HttpModule, ChartModule.forRoot(highcharts)
+    HttpModule,
+    AngularFireModule.initializeApp(FIREBASE_CONFIG)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -52,6 +56,7 @@ import { StompService } from 'ng2-stomp-service';
     MapaPage,
     EstacionPage,
     HistoriaPage,
+    ChartlivePage,
     TabsPage
   ],
   providers: [

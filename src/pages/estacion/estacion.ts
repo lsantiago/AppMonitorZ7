@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { EstacionProvider } from '../../providers/estacion/estacion';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HistoriaPage } from '../historia/historia';
+import { ChartlivePage } from '../chartlive/chartlive';
 
 /**
  * Generated class for the EstacionPage page.
@@ -43,6 +44,12 @@ export class EstacionPage {
   getHistoria(codigoEstacion, codigoVariable){
     this.navCtrl.push(HistoriaPage, {codigoEstacion, codigoVariable})
   }
+
+  showLiveVariable(codigoEstacion, codigoVariable){
+    this.navCtrl.push(ChartlivePage, {codigoEstacion, codigoVariable})
+  }
+
+
 
   // Obtiene la lista de estaciones
   getDatosEstacion(codigoEstacion: string) {
