@@ -21,6 +21,8 @@ import { HttpModule } from '@angular/http';
 import { ChartModule } from 'angular2-highcharts'; 
 import * as highcharts from 'highcharts';
 
+import { StompService } from 'ng2-stomp-service';
+
 
 
 @NgModule({
@@ -56,7 +58,8 @@ import * as highcharts from 'highcharts';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    EstacionProvider
+    EstacionProvider,
+    StompService
   ]
 })
 export class AppModule {}

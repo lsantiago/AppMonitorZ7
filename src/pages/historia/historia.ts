@@ -3,18 +3,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { EstacionProvider } from '../../providers/estacion/estacion';
 
-declare var SockJS: any;
-declare var Stomp: any
+import { StompService } from 'ng2-stomp-service';
+import moment from 'moment';
 
-// opciones MQTT
-var username = "guest",
-    password = "guest",
-    vhost    = "/",
-    url      = 'http://' + '200.0.29.38:8080' + '/stomp',
-    queue    = "/topic/plataforma.sensor.#";
 
-var ws: any;
-var client: any;
+
+
 
 /**
  * Generated class for the HistoriaPage page.
@@ -42,16 +36,51 @@ var client: any;
   private detalle;
 
   private chartOptions: any;
+  private chartLive: any;
 
   private listaFechasRegistro: any = [];
   private listaValoresRegistro: Array<number> = [];
 
 
- 
+  private subscription : any;
+
+
+  private _chart: any;
+
+  private ISTOffset = 330;   // IST offset UTC +5:30
+  private  options = {
+    chart: {
+        type: 'spline',
+        marginRight: 30
+      },
+      title: {
+        text: 'Live Sensor data'
+      },
+      xAxis: {
+        type: 'datetime',
+        tickPixelInterval: 150
+      },
+      yAxis: {
+        title: {
+          text: 'Value'
+        }
+      },
+      legend: {
+        enabled: false
+      },
+      exporting: {
+        enabled: false
+      },
+      series: [{
+        name: 'Sensor data'
+      }]
+    
+  }
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
   	public estacionService: EstacionProvider,
-    public toastCtrl: ToastController) {
+    public toastCtrl: ToastController,
+    public stomp: StompService) {
 
   }
 
@@ -79,16 +108,17 @@ var client: any;
       this.capturarRegistros();
       this.setPropiedadesChart();
 
+      this.setPropiedadesChartLive();
+
       this.establecerConexionMQTT();
+      
     },(error) => {console.error(error);})
-
-
-
-
   }
 
 
-  /*--------------------------------GRAPH---------------------------*/
+
+
+  /*--------------------------------GRAPH HISTORY---------------------------*/
   setPropiedadesChart(){
     this.chartOptions = {
       chart: {
@@ -129,9 +159,7 @@ var client: any;
       series: [{name: 'Datos diarios', data: this.listaValoresRegistro}] 
     }
   }
-  /*--------------------------------END OF GRAPH---------------------------*/
 
-  /*--------------------------------MQTT---------------------------*/
   capturarRegistros(){
     for(let registro of this.registrosFull){
       //console.log('Valor: ' + registro.valor + ', Fecha: ' + registro.fechaPublicacion);
@@ -140,45 +168,104 @@ var client: any;
     }
 
   }
+  /*--------------------------------END OF GRAPH HISTORY---------------------------*/
+
+  /*--------------------------------GRAPH LIVE---------------------------*/
+  
+  
+
+  
+  
+  setPropiedadesChartLive(){
+    this.chartLive = {
+      chart: {
+        type: 'spline',
+        marginRight: 30
+      },
+      title: {
+        text: 'Live Sensor data'
+      },
+      xAxis: {
+        type: 'datetime',
+        tickPixelInterval: 150
+      },
+      yAxis: {
+        title: {
+          text: 'Value'
+        }
+      },
+      legend: {
+        enabled: false
+      },
+      exporting: {
+        enabled: false
+      },
+      series: [{
+        name: 'Sensor data',
+        data: (function () {
+              var data = [],
+                  time = moment().valueOf(),
+                  i;
+
+              for (i = -19; i <= 0; i += 1) {
+                data.push({
+                  x: time + i * 1000,
+                  y: null
+                });
+              }
+              return data;
+            }())
+      }]
+    }
+  }  
+
+  addPoint(point) {
+    setInterval(() => this.chartLive.series[0].addPoint(
+      [moment().valueOf(),point, true,true]));
+
+    
+  };
+
+  /*--------------------------------END GRAPH LIVE---------------------------*/
 
 
+  /*--------------------------------MQTT---------------------------*/
   establecerConexionMQTT(){
-
-    console.log("START");
-    ws = new SockJS(url)
-    client = Stomp.over(ws);
-    client.connect(
-      username,
-      password,
-      this.onConnect,
-      this.on_connection_error,
-      vhost
-      );
-  }
-
-  onConnect() {
-    console.log("onConnect");
-    client.subscribe(queue, this.response);
-
-    //this._client.subscribe("world", "asd");
-  }
-
-  on_message(m) {
-    //console.log('Llego este mensaje.. ' + m);
-    let toast = this.toastCtrl.create({
-      message: 'LLego un mensaje!',
-      duration: 2000
+    //configuration
+    this.stomp.configure({
+      host:'http://200.0.29.38:8080/stomp',
+      headers: {
+        login: 'guest',
+        passcode: 'guest'
+      },
+      debug:true,
+      queue:{'init':false}
     });
-    toast.present();
+
+    //start connection
+    this.stomp.startConnect().then(() => {
+      this.stomp.done('init');
+      console.log('connected');
+      
+      //subscribe
+      this.subscription = this.stomp.subscribe('/topic/plataforma.sensor.#', this.response);
+
+    });
+    
   }
 
   public response = (data) => {
-    console.log(data)
+    console.log(data);
+    let toast = this.toastCtrl.create({
+      message: 'LLego el valor.. ' + data.var.b,
+      duration: 2000
+    });
+    toast.present();
+
+    this.addPoint(Number(data.var.b));
   }
 
-  on_connection_error(e) {
-    console.log("Error",e); 
-  }
+  
   /*--------------------------------END MQTT---------------------------*/
 
 }
