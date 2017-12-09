@@ -11,6 +11,7 @@ import { EstacionPage } from '../pages/estacion/estacion';
 import { HistoriaPage } from '../pages/historia/historia';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ChartlivePage } from '../pages/chartlive/chartlive';
+import { LoginPage } from '../pages/login/login';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -24,7 +25,9 @@ import { HttpModule } from '@angular/http';
 import { StompService } from 'ng2-stomp-service';
 
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { FIREBASE_CONFIG } from './app.firebase.config';
+
 
 
 @NgModule({
@@ -37,7 +40,8 @@ import { FIREBASE_CONFIG } from './app.firebase.config';
     EstacionPage,
     HistoriaPage,
     ChartlivePage,
-    TabsPage
+    TabsPage,
+    LoginPage
 
   ],
   imports: [
@@ -45,7 +49,8 @@ import { FIREBASE_CONFIG } from './app.firebase.config';
     HttpClientModule,
     IonicModule.forRoot(MyApp),
     HttpModule,
-    AngularFireModule.initializeApp(FIREBASE_CONFIG)
+    AngularFireModule.initializeApp(FIREBASE_CONFIG.firebase),
+    AngularFireAuthModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -57,7 +62,8 @@ import { FIREBASE_CONFIG } from './app.firebase.config';
     EstacionPage,
     HistoriaPage,
     ChartlivePage,
-    TabsPage
+    TabsPage,
+    LoginPage
   ],
   providers: [
     StatusBar,
