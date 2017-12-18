@@ -9,6 +9,10 @@
     {
       "path": "/platform",
       "proxyUrl": "http://200.0.29.38:8080/platform"
+    },
+    {
+      "path": "/stomp",
+      "proxyUrl": "http://200.0.29.38:8080/stomp"
     }
   ]
 }

@@ -64,7 +64,7 @@ export class ChartlivePage {
               for (i = -19; i <= 0; i += 1) {
                 data.push({
                   x: time + i * 1000,
-                  y: null
+                  y: Math.random() + 0.0002
                 });
               }
               return data;
@@ -110,7 +110,7 @@ export class ChartlivePage {
   establecerConexionMQTT(){
     //configuration
     this.stomp.configure({
-      host:'http://200.0.29.38:8080/stomp',
+      host:'/stomp',
       headers: {
         login: 'guest',
         passcode: 'guest'
