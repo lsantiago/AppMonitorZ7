@@ -36,7 +36,7 @@
       Menus
     </ion-title>
   </ion-navbar> -->
-    <ion-searchbar color="primary" (input)="getItems($event)" placeholder = "Buscar"></ion-searchbar>
+    <ion-searchbar color="primary" (input)="getItems($event)" (ionClear)="getItems($event)"  placeholder = "Buscar"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
@@ -58,14 +58,14 @@
       </button>
 
       <ion-item-options>
-        <button ion-button color="secondary">
-          Ubicar
-        </button>
         <button ion-button color="favorite">
           Favorito
         </button>
         <button ion-button color="danger">
           Remover
+        </button>
+        <button ion-button color="secondary">
+          Ubicar
         </button>
       </ion-item-options>
 

@@ -14,7 +14,8 @@ $ ionic generate page About --constants
 $ ionic generate pipe MyFilterPipe
 
 
-
+Para corregir problemas entre Sistemas Operativos
+npm rebuild node-sass
 
 COMPILE AND RUN
 ionic cordova platform add android
