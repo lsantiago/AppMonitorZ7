@@ -46,9 +46,9 @@
   <!-- LISTA DE ESTACIONES -->
   <ion-list>
 
-    <ion-item-sliding *ngFor="let item of items">
+    <ion-item-sliding *ngFor="let item of items" #slidingItem>
 
-      <button ion-item (click)="getEstacion(item.codigo)">
+      <button ion-item (click)="showEstacion(item.codigo)">
         <h3><ion-icon name="cube" item-start></ion-icon>{{item.nombre}}</h3>
         <p>
           Topico: {{item.topico}} &mdash;
@@ -57,16 +57,22 @@
          
       </button>
 
-      <ion-item-options>
+
+      <ion-item-options side="left" (ionSwipe)="ubicarEstacion(item.nombre, item.latitud, item.longitud, slidingItem)">
+        <button ion-button expandable color="secondary" 
+          (clic)="ubicarEstacion(item.nombre, item.latitud, item.longitud, slidingItem)">
+          Ubicar
+        </button>
+      </ion-item-options>
+
+      <ion-item-options side="right">
         <button ion-button color="favorite">
           Favorito
         </button>
         <button ion-button color="danger">
           Remover
         </button>
-        <button ion-button color="secondary">
-          Ubicar
-        </button>
+        
       </ion-item-options>
 
     </ion-item-sliding>
@@ -112,14 +118,7 @@
 
   
   
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+  
 -->
 
 

@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { NavController, IonicPage } from 'ionic-angular';
 import { EstacionProvider } from '../../providers/estacion/estacion';
 import { EstacionPage } from '../estacion/estacion';
+import { MapaPage } from '../mapa/mapa';
+import { ItemSliding } from 'ionic-angular';
+import { ChangeDetectorRef } from "@angular/core";
+import { PosicionEstacionPage } from '../posicion-estacion/posicion-estacion';
 
 
 @Component({
@@ -14,7 +18,8 @@ export class HomePage {
   private searchQuery: string = '';
   private items: any = [];
 
-  constructor(public navCtrl: NavController, public estacionService: EstacionProvider) {
+  constructor(public navCtrl: NavController, public estacionService: EstacionProvider,
+  public changeDetectorRef: ChangeDetectorRef) {
     
   }
 
@@ -27,8 +32,15 @@ export class HomePage {
   }
 
   // Envía el código de la estación a EstacionPage
-  getEstacion(codigoEstacion){
+  showEstacion(codigoEstacion){
     this.navCtrl.push(EstacionPage, {codigoEstacion})
+  }
+
+  // Ubica a la estación en mapa
+  ubicarEstacion(nombre, latitud, longitud, slidingItem: ItemSliding){
+    //console.log('Enviando la estación.. ' + codigo);
+    this.navCtrl.push(PosicionEstacionPage, {nombre, latitud, longitud});
+    slidingItem.close();
   }
 
   // Obtiene la lista de estaciones
@@ -70,5 +82,9 @@ export class HomePage {
       
       
     }
+  }
+
+  ionChange(){
+    this.changeDetectorRef.detectChanges();
   }
 }

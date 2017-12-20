@@ -57,7 +57,12 @@ export class EstacionPage {
         this.datosEstacion = data;
         this.variablesEstacion = this.datosEstacion.variables;
 
-        console.log('Primera variable: ' + this.variablesEstacion[0].nombre);
+        // extracción de coordenadas
+        console.log('Latitid: ' + this.datosEstacion.latitud);
+        console.log('Longitud: ' + this.datosEstacion.longitud);
+
+        // Obtiene datos de la primera variable del sensor
+        //console.log('Primera variable: ' + this.variablesEstacion[0].nombre);
       },
       (error) => {
         console.error(error);

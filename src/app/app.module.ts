@@ -12,6 +12,8 @@ import { HistoriaPage } from '../pages/historia/historia';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ChartlivePage } from '../pages/chartlive/chartlive';
 import { InterpolacionPage } from '../pages/interpolacion/interpolacion';
+import { PosicionEstacionPage } from '../pages/posicion-estacion/posicion-estacion';
+
 import { LoginPage } from '../pages/login/login';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -43,7 +45,8 @@ import { FIREBASE_CONFIG } from './app.firebase.config';
     ChartlivePage,
     TabsPage,
     LoginPage,
-    InterpolacionPage
+    InterpolacionPage,
+    PosicionEstacionPage
 
   ],
   imports: [
@@ -66,7 +69,8 @@ import { FIREBASE_CONFIG } from './app.firebase.config';
     ChartlivePage,
     TabsPage,
     LoginPage,
-    InterpolacionPage
+    InterpolacionPage,
+    PosicionEstacionPage
   ],
   providers: [
     StatusBar,

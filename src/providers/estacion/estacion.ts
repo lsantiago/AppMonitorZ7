@@ -19,7 +19,9 @@ import 'rxjs/add/operator/catch';
   @Injectable()
   export class EstacionProvider {
     
+    // recurso global, se actualiza en home.ts
     listaEstaciones: any = []
+    
     private urlEstaciones: string = "platform/api/public/meteorological";
     private urlDetalleEstacion: string = 'platform/api/public/meteorological/detail/';
     

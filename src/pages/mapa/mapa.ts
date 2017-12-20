@@ -20,22 +20,33 @@
     templateUrl: 'mapa.html',
   })
   export class MapaPage {
+    // datos de todas las estaciones
     private estaciones: any = [];
 
+    // para ubicar una estación
+    private codigoEstacion: string;
       
     @ViewChild('mapCanvas') mapElement: ElementRef;
     private locations: Array<any> = [] ;
 
     constructor(private platform:Platform,
-                public estacionService: EstacionProvider) {
+                public estacionService: EstacionProvider,
+              private navParams: NavParams) {
     	
     	
     }
 
+    ngOnInit(){
+      
+    }
+
     ionViewDidLoad() {
       this.platform.ready().then(() => {
-        this.estaciones = this.estacionService.listaEstaciones;
+        this.codigoEstacion = this.navParams.get('codigo');
+        console.log('Código: ' + this.codigoEstacion);
 
+        this.estaciones = this.estacionService.listaEstaciones;
+        
         for (let estacion of this.estaciones){
           
           if(estacion.latitud != null){
