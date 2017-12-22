@@ -1,11 +1,11 @@
 <ion-header>
-  
+
   <ion-navbar no-border-bottom>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
 
-    
+
     <!-- <ion-segment>
       <ion-segment-button value="all">
         Todos
@@ -21,23 +21,15 @@
       </button>
     </ion-buttons>
   -->
-  
-  </ion-navbar>
-  
 
-  
- 
-  
+  </ion-navbar>
+
+
+
+
+
   <ion-toolbar no-border-top>
-    <!-- <ion-navbar>
-    <button ion-button menuToggle icon-only>
-      <ion-icon name='menu'></ion-icon>
-    </button>
-    <ion-title>
-      Menus
-    </ion-title>
-  </ion-navbar> -->
-    <ion-searchbar color="primary" (input)="getItems($event)" (ionClear)="getItems($event)"  placeholder = "Buscar"></ion-searchbar>
+    <ion-searchbar color="primary" (input)="getItems($event)" (ionClear)="getItems($event)" placeholder="Buscar"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
@@ -50,18 +42,17 @@
     <ion-item-sliding *ngFor="let item of items" #slidingItem>
 
       <button ion-item (click)="showEstacion(item.codigo)">
-        <h3><ion-icon name="cube" item-start></ion-icon>{{item.nombre}}</h3>
+        <h3>
+          <ion-icon name="cube" item-start></ion-icon>{{item.nombre}}</h3>
         <p>
-          Topico: {{item.topico}} &mdash;
-          {{item.ultimaActualizacion}}
+          Topico: {{item.topico}} &mdash; {{item.ultimaActualizacion | date :  "y.MM.dd HH:mm"}}
         </p>
-         
+
       </button>
 
 
       <ion-item-options side="left" (ionSwipe)="ubicarEstacion(item.nombre, item.latitud, item.longitud, slidingItem)">
-        <button ion-button expandable color="secondary" 
-          (clic)="ubicarEstacion(item.nombre, item.latitud, item.longitud, slidingItem)">
+        <button ion-button expandable color="secondary" (clic)="ubicarEstacion(item.nombre, item.latitud, item.longitud, slidingItem)">
           Ubicar
         </button>
       </ion-item-options>
@@ -73,7 +64,7 @@
         <button ion-button color="danger">
           Remover
         </button>
-        
+
       </ion-item-options>
 
     </ion-item-sliding>
@@ -90,8 +81,8 @@
       </button>-->
 
 
-    </ion-list>
-    <!-- END LISTA DE ESTACIONES -->
+  </ion-list>
+  <!-- END LISTA DE ESTACIONES -->
 
 
   <!-- 

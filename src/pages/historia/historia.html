@@ -71,7 +71,7 @@
         </ion-note>
       </ion-list-header>
       <button ion-item *ngFor="let registro of registrosFull">
-        {{ registro.fechaPublicacion }}
+        {{ registro.fechaPublicacion | date :  "y.MM.dd HH:mm" }}
         <ion-badge item-end>{{ registro.valor }}</ion-badge>
       </button>
     </ion-list>
