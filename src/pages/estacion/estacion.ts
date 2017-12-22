@@ -22,17 +22,17 @@ export class EstacionPage {
   private codigoEstacion: string;
   private datosEstacion: any = [];
 
-  constructor(public navCtrl: NavController, 
-  	public navParams: NavParams, 
-  	public estacionService: EstacionProvider) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public estacionService: EstacionProvider) {
 
   }
 
-  ngOnInit(){
-  	this.codigoEstacion = this.navParams.get('codigoEstacion');
-  	console.log("Station Code in EstationPage: " + this.codigoEstacion);
+  ngOnInit() {
+    this.codigoEstacion = this.navParams.get('codigoEstacion');
+    console.log("Station Code in EstationPage: " + this.codigoEstacion);
 
-  	this.getDatosEstacion(this.codigoEstacion);
+    this.getDatosEstacion(this.codigoEstacion);
 
 
   }
@@ -41,12 +41,12 @@ export class EstacionPage {
     console.log('ionViewDidLoad EstacionPage');
   }
 
-  getHistoria(codigoEstacion, codigoVariable){
-    this.navCtrl.push(HistoriaPage, {codigoEstacion, codigoVariable})
+  getHistoria(codigoEstacion, codigoVariable) {
+    this.navCtrl.push(HistoriaPage, { codigoEstacion, codigoVariable })
   }
 
-  showLiveVariable(codigoEstacion, codigoVariable){
-    this.navCtrl.push(ChartlivePage, {codigoEstacion, codigoVariable})
+  showLiveVariable(codigoEstacion, codigoVariable) {
+    this.navCtrl.push(ChartlivePage, { codigoEstacion, codigoVariable })
   }
 
 
@@ -54,21 +54,34 @@ export class EstacionPage {
   // Obtiene la lista de estaciones
   getDatosEstacion(codigoEstacion: string) {
     this.estacionService.getDetalleEstacion(codigoEstacion).subscribe(data => { // Success
-        this.datosEstacion = data;
-        this.variablesEstacion = this.datosEstacion.variables;
+      this.datosEstacion = data;
+      this.variablesEstacion = this.datosEstacion.variables;
 
-        // extracción de coordenadas
-        console.log('Latitid: ' + this.datosEstacion.latitud);
-        console.log('Longitud: ' + this.datosEstacion.longitud);
+      this.ordenarListaVariables();
 
-        // Obtiene datos de la primera variable del sensor
-        //console.log('Primera variable: ' + this.variablesEstacion[0].nombre);
-      },
+      // extracción de coordenadas
+      console.log('Latitid: ' + this.datosEstacion.latitud);
+      console.log('Longitud: ' + this.datosEstacion.longitud);
+
+      // Obtiene datos de la primera variable del sensor
+      //console.log('Primera variable: ' + this.variablesEstacion[0].nombre);
+    },
       (error) => {
         console.error(error);
       })
 
-      this.loadCompleted = true;
+    this.loadCompleted = true;
+  }
+
+  
+  ordenarListaVariables() {
+    this.variablesEstacion.sort(function (a, b) {
+      if (a.nombre < b.nombre)
+        return -1;
+      if (a.nombre > b.nombre)
+        return 1;
+      return 0;
+    });
   }
 
 }
