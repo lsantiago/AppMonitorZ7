@@ -14,6 +14,9 @@ $ ionic generate page About --constants
 $ ionic generate pipe MyFilterPipe
 
 
+Identar
+Ctrl + Shift + I
+
 Para corregir problemas entre Sistemas Operativos
 npm rebuild node-sass
 

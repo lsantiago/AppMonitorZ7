@@ -37,10 +37,10 @@ export class HomePage {
   }
 
   // Ubica a la estación en mapa
-  ubicarEstacion(nombre, latitud, longitud, slidingItem: ItemSliding){
-    //console.log('Enviando la estación.. ' + codigo);
-    this.navCtrl.push(PosicionEstacionPage, {nombre, latitud, longitud});
+  ubicarEstacion(nombre, latitud, longitud, slidingItem: any){
     slidingItem.close();
+    this.navCtrl.push(PosicionEstacionPage, {nombre, latitud, longitud});
+    
   }
 
   // Obtiene la lista de estaciones

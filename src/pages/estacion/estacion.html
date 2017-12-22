@@ -7,24 +7,28 @@
 <ion-header>
 
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Lista de variables</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content  padding>
+<ion-content padding>
 
   <ion-spinner *ngIf="!loadCompleted" name="crescent" class="posts-load-spinner"></ion-spinner>
 
   <!-- LISTA DE VARIABLES -->
   <ion-list>
-    <ion-item *ngFor="let variable of variablesEstacion" >
+    <ion-item *ngFor="let variable of variablesEstacion">
       <ion-label>
-        <h2 Vertical Timeline> <i class={{variable.icono}}></i> {{ variable.nombre }}</h2>
+        <h2 Vertical Timeline>
+          <i class={{variable.icono}}></i> {{ variable.nombre }}</h2>
         <!-- <p ion-text color="dynamicColor" style="font-size: 12px;">{{variable.fechaRegistro}}</p> -->
       </ion-label>
-      
+
       <ion-note item-end>
         <button ion-button icon-only (click)="showLiveVariable(variable.codigoEstacion, variable.codigoVariable)">
           <ion-icon name="ios-pulse-outline">
@@ -35,7 +39,7 @@
         </button>
         <!-- <p ion-text color="dark">{{variable.valor}}{{variable.unidad}}</p> -->
       </ion-note>
-      
+
     </ion-item>
   </ion-list>
   <!-- END LISTA DE VARIABLES -->

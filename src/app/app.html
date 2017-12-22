@@ -4,22 +4,16 @@
       <!-- <ion-title>Menu</ion-title> -->
     </ion-toolbar>
   </ion-header>
-  <ion-content>
+  <ion-content padding>
     <ion-list>
-      <button ion-item (click)="openPage(homePage)">
-        Home
+
+      <button ion-item (click)="cerrarSesion()">
+        Cerrar sesión
       </button>
-      <button ion-item (click)="openPage(friendsPage)">
-        Friends
-      </button>
-      <button ion-item (click)="openPage(eventsPage)">
-        Events
-      </button>
-      <button ion-item (click)="closeMenu()">
-        Close Menu
-      </button>
+
     </ion-list>
+    <!-- <button ion-button menuClose="left">Close Left Menu</button> -->
   </ion-content>
 </ion-menu>
 
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-nav [root]="rootPage" #content></ion-nav>
