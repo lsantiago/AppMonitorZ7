@@ -17,12 +17,12 @@ declare var moment: any;
  * Ionic pages and navigation.
  */
 
- @IonicPage()
- @Component({
-   selector: 'page-historia',
-   templateUrl: 'historia.html',
- })
- export class HistoriaPage {
+@IonicPage()
+@Component({
+  selector: 'page-historia',
+  templateUrl: 'historia.html',
+})
+export class HistoriaPage {
 
   summary: string = "grafico"; // default button
 
@@ -36,13 +36,13 @@ declare var moment: any;
   private detalle;
 
   private chartHistory: any;
-  
+
 
   private listaFechasRegistro: any = [];
   private listaValoresRegistro: Array<number> = [];
 
 
-  
+
 
   private optionsHistory = {
     chart: {
@@ -67,12 +67,12 @@ declare var moment: any;
         style: {
           fontSize: '10px'
         },
-        formatter: function(){
-          if (this.value.length > 10){
-            return this.value.substr(0,10) + "...";
-          }else{
-            return this.value;   
-          }                        
+        formatter: function () {
+          if (this.value.length > 10) {
+            return this.value.substr(0, 10) + "...";
+          } else {
+            return this.value;
+          }
         }
       }
     },
@@ -81,12 +81,12 @@ declare var moment: any;
         text: "Valor"
       }
     },
-    series: [{name: 'Datos diarios', data: this.listaValoresRegistro}] 
+    series: [{ name: 'Datos diarios', data: this.listaValoresRegistro }]
   }
-  
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-  	public estacionService: EstacionProvider,
+    public estacionService: EstacionProvider,
     public toastCtrl: ToastController,
     public stomp: StompService) {
 
@@ -97,49 +97,58 @@ declare var moment: any;
 
   }
 
-  ngOnInit(){
-  	this.codigoEstacion = this.navParams.get('codigoEstacion');
-  	this.codigoVariable = this.navParams.get('codigoVariable');
+  ngOnInit() {
+    this.codigoEstacion = this.navParams.get('codigoEstacion');
+    this.codigoVariable = this.navParams.get('codigoVariable');
 
-  	console.log('Obteniendo datos de estación: ' + this.codigoEstacion + 
-  		', variable: ' + this.codigoVariable);
+    console.log('Obteniendo datos de estación: ' + this.codigoEstacion +
+      ', variable: ' + this.codigoVariable);
 
-  	this.estacionService.getHistoriaVariable(this.codigoEstacion, this.codigoVariable).subscribe(data => {
-		this.datosHistoriaVariable = data;
-    this.registrosFull = this.datosHistoriaVariable.summary;
+    this.estacionService.getHistoriaVariable(this.codigoEstacion, this.codigoVariable).subscribe(data => {
+      this.datosHistoriaVariable = data;
+      this.registrosFull = this.datosHistoriaVariable.summary;
 
-    console.log('Mínimo: ', this.datosHistoriaVariable.minimo.valor);
-    this.minReg = this.datosHistoriaVariable.minimo.valor;
-    this.maxReg = this.datosHistoriaVariable.maximo.valor;
-    this.unidad = this.datosHistoriaVariable.variableDTO.unidad;
-    this.detalle = this.datosHistoriaVariable.variableDTO.nombre;
-    
-    this.capturarRegistros();
-    this.setPropiedadesChart();
-    
-    },(error) => {console.error(error);})
+      console.log('Mínimo: ', this.datosHistoriaVariable.minimo.valor);
+      this.minReg = this.datosHistoriaVariable.minimo.valor;
+      this.maxReg = this.datosHistoriaVariable.maximo.valor;
+      this.unidad = this.datosHistoriaVariable.variableDTO.unidad;
+      this.detalle = this.datosHistoriaVariable.variableDTO.nombre;
+
+      this.ordenarRegistros();
+      this.capturarRegistros();
+      this.setPropiedadesChart();
+
+    }, (error) => { console.error(error); })
   }
 
+  // ordena los registros antes de presentarlos
+  ordenarRegistros() {
+    this.registrosFull.sort(function (a, b) {
+      a = new Date(a.fechaPublicacion);
+      b = new Date(b.fechaPublicacion);
+      return a > b ? -1 : a < b ? 1 : 0;
+    });
+  }
 
 
 
   /*--------------------------------GRAPH HISTORY---------------------------*/
-  setPropiedadesChart(){
+  setPropiedadesChart() {
     this.chartHistory = new Highcharts.chart(this.optionsHistory);
   }
 
-  capturarRegistros(){
-    for(let registro of this.registrosFull){
+  capturarRegistros() {
+    for (let registro of this.registrosFull) {
       //console.log('Valor: ' + registro.valor + ', Fecha: ' + registro.fechaPublicacion);
       this.listaFechasRegistro.push(registro.fechaPublicacion);
-      this.listaValoresRegistro.push(parseFloat(registro.valor)); 
+      this.listaValoresRegistro.push(parseFloat(registro.valor));
     }
 
   }
   /*--------------------------------END OF GRAPH HISTORY---------------------------*/
 
-  
 
-  
+
+
 
 }
