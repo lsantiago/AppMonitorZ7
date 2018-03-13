@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { EstacionProvider } from '../../providers/estacion/estacion';
 
@@ -48,6 +48,7 @@ export class HistoriaPage {
   private listaValoresRegistroASC: Array<number> = [];
 
 
+  
 
 
 
@@ -95,7 +96,8 @@ export class HistoriaPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public estacionService: EstacionProvider,
     public toastCtrl: ToastController,
-    public stomp: StompService) {
+    public stomp: StompService,
+    private loadingCtrl: LoadingController) {
 
   }
 
@@ -105,11 +107,18 @@ export class HistoriaPage {
   }
 
   ngOnInit() {
+    const loading = this.loadingCtrl.create({
+      content: 'Descargando datos.'
+    });
+
+
     this.codigoEstacion = this.navParams.get('codigoEstacion');
     this.codigoVariable = this.navParams.get('codigoVariable');
 
     console.log('Obteniendo datos de estación: ' + this.codigoEstacion +
       ', variable: ' + this.codigoVariable);
+
+    loading.present();
 
     this.estacionService.getHistoriaVariable(this.codigoEstacion, this.codigoVariable).subscribe(data => {
       this.datosHistoriaVariable = data;
@@ -126,6 +135,8 @@ export class HistoriaPage {
       this.capturarRegistros();
 
       this.setPropiedadesChart();
+
+      loading.dismiss();
 
     }, (error) => { console.error(error); })
   }

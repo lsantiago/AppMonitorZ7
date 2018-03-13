@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { EstacionProvider } from '../../providers/estacion/estacion';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { HistoriaPage } from '../historia/historia';
 import { ChartlivePage } from '../chartlive/chartlive';
 
@@ -24,7 +24,8 @@ export class EstacionPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    public estacionService: EstacionProvider) {
+    public estacionService: EstacionProvider,
+    private loadingCtrl: LoadingController) {
 
   }
 
@@ -32,9 +33,16 @@ export class EstacionPage {
     this.codigoEstacion = this.navParams.get('codigoEstacion');
     console.log("Station Code in EstationPage: " + this.codigoEstacion);
 
+    
+    const loading = this.loadingCtrl.create({
+      content: 'Obteniendo variables'
+    });
+
+    loading.present();
+
     this.getDatosEstacion(this.codigoEstacion);
 
-
+    loading.dismiss();
   }
 
   ionViewDidLoad() {

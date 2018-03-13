@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, IonicPage } from 'ionic-angular';
+import { NavController, IonicPage, LoadingController} from 'ionic-angular';
 import { EstacionProvider } from '../../providers/estacion/estacion';
 import { EstacionPage } from '../estacion/estacion';
 import { MapaPage } from '../mapa/mapa';
@@ -19,12 +19,22 @@ export class HomePage {
   private items: any = [];
 
   constructor(public navCtrl: NavController, public estacionService: EstacionProvider,
-    public changeDetectorRef: ChangeDetectorRef) {
+    public changeDetectorRef: ChangeDetectorRef,
+    private loadingCtrl: LoadingController) {
 
   }
 
   ionViewDidLoad() {
+    const loading = this.loadingCtrl.create({
+      content: 'Obteniendo estaciones'
+    });
+
+    loading.present();
+
+    // Extrae lista de estaciones medioambientales
     this.extraerEstaciones();
+
+    loading.dismiss();
   }
 
   initializeItems() {
