@@ -1,3 +1,4 @@
+import { UserProvider } from './../../providers/user/user';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { User } from '../../models/user';
@@ -15,27 +16,28 @@ import { ToastController } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
-@Component({
-  selector: 'page-login',
-  templateUrl: 'login.html',
-})
-export class LoginPage {
-  user = {} as User;
+ @IonicPage()
+ @Component({
+   selector: 'page-login',
+   templateUrl: 'login.html',
+ })
+ export class LoginPage {
+   user = {} as User;
 
-  constructor(private afAuth: AngularFireAuth, 
-  	public navCtrl: NavController, public navParams: NavParams, 
-  	public toastCtrl: ToastController) {
-  }
+   constructor(private afAuth: AngularFireAuth, 
+     public navCtrl: NavController, public navParams: NavParams, 
+     public toastCtrl: ToastController,
+     private userProvider: UserProvider) {
+   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
+   ionViewDidLoad() {
+     console.log('ionViewDidLoad LoginPage');
+   }
 
-  async login(user: User) {
-    try {
-      const result = await this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password);
-      if (result) {
+   async login(user: User) {
+     try {
+       const result = await this.afAuth.auth.signInWithEmailAndPassword(user.username, user.password);
+       if (result) {
         //this.navCtrl.setRoot('HomePage');
         this.navCtrl.push(TabsPage)
         console.log("Ingreso correctament...");
@@ -46,13 +48,26 @@ export class LoginPage {
       console.error(e);
     }
   }
- 
+
+  logear(user: User) {
+    this.userProvider.login(user.username, user.password)
+    .then((result: any) => {
+      this.navCtrl.push(TabsPage)
+      console.log("Bienvenido.");
+    })
+    .catch((error: any) => {
+      console.log(error);
+      this.lanzarToast('Datos incorrectos'); 
+    });
+  }
+
+
   async register(user: User) {
     try {
       const result = await this.afAuth.auth.createUserWithEmailAndPassword(
-        user.email,
+        user.username,
         user.password
-      );
+        );
       if (result) {
         //this.navCtrl.setRoot('HomePage');
         this.navCtrl.push(TabsPage);
@@ -66,10 +81,10 @@ export class LoginPage {
 
   lanzarToast(sms){
   	let toast = this.toastCtrl.create({
-  			message: sms,
-  			duration: 2000
-  		});
-  		toast.present();
+      message: sms,
+      duration: 2000
+    });
+    toast.present();
   }
 
 }

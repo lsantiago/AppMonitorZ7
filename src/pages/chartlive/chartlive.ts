@@ -61,10 +61,11 @@ export class ChartlivePage {
                   time = (new Date()).getTime(),
                   i;
 
+              // Datos de ejemplo
               for (i = -19; i <= 0; i += 1) {
                 data.push({
-                  x: time + i * 1000,
-                  y: Math.random() + 0.0002
+                  x: null, 
+                  y: null
                 });
               }
               return data;

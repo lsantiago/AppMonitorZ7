@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>MyApp</name>
-    <description>An awesome Ionic/Cordova app.</description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+    <name>AppMonitorZ7</name>
+    <description>Monitor de variables medioambientales</description>
+    <author email="lsquinones@gmail.com" href="https://about.me/santiagoquinones">Santiago Quiñones</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="http://200.0.29.38:8080/*" />
@@ -81,8 +81,9 @@
     </platform>
     <allow-navigation href="http://localhost:8100" />
     <allow-navigation href="http://192.168.1.17:8100" />
-    <engine name="android" spec="6.3.0" />
+    <allow-navigation href="http://192.168.1.13:8100" />
     <engine name="browser" spec="5.0.1" />
+    <engine name="android" spec="6.3.0" />
     <plugin name="cordova-plugin-googlemaps" spec="^2.1.1">
         <variable name="API_KEY_FOR_ANDROID" value="AIzaSyB0YU1TN2R0-uLCb03QIPwSdKXjRNB5tH8" />
         <variable name="API_KEY_FOR_IOS" value="AIzaSyDbO1sSrJjgj6dPOCJ4DloLjkCpWqraJbU" />

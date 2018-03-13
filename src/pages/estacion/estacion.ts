@@ -51,7 +51,7 @@ export class EstacionPage {
 
 
 
-  // Obtiene la lista de estaciones
+  // Obtiene variables medioambientales
   getDatosEstacion(codigoEstacion: string) {
     this.estacionService.getDetalleEstacion(codigoEstacion).subscribe(data => { // Success
       this.datosEstacion = data;

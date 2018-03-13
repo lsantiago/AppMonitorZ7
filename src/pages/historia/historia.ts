@@ -29,7 +29,9 @@ export class HistoriaPage {
   private codigoEstacion: string;
   private codigoVariable: string;
   private datosHistoriaVariable: any = [];
+  
   private registrosFull: any = [];
+  
   private minReg;
   private maxReg;
   private unidad;
@@ -40,6 +42,11 @@ export class HistoriaPage {
 
   private listaFechasRegistro: any = [];
   private listaValoresRegistro: Array<number> = [];
+
+  // to graph
+  private listaFechasRegistroASC: any = [];
+  private listaValoresRegistroASC: Array<number> = [];
+
 
 
 
@@ -60,7 +67,7 @@ export class HistoriaPage {
       x: 25
     },
     xAxis: {
-      categories: this.listaFechasRegistro,
+      categories: this.listaFechasRegistroASC,
       labels: {
         rotation: 270,
         step: 20,
@@ -81,7 +88,7 @@ export class HistoriaPage {
         text: "Valor"
       }
     },
-    series: [{ name: 'Datos diarios', data: this.listaValoresRegistro }]
+    series: [{ name: 'Datos diarios', data: this.listaValoresRegistroASC }]
   }
 
 
@@ -107,27 +114,40 @@ export class HistoriaPage {
     this.estacionService.getHistoriaVariable(this.codigoEstacion, this.codigoVariable).subscribe(data => {
       this.datosHistoriaVariable = data;
       this.registrosFull = this.datosHistoriaVariable.summary;
-
+      
       console.log('Mínimo: ', this.datosHistoriaVariable.minimo.valor);
       this.minReg = this.datosHistoriaVariable.minimo.valor;
       this.maxReg = this.datosHistoriaVariable.maximo.valor;
       this.unidad = this.datosHistoriaVariable.variableDTO.unidad;
       this.detalle = this.datosHistoriaVariable.variableDTO.nombre;
 
-      this.ordenarRegistros();
+      
+      
       this.capturarRegistros();
+
       this.setPropiedadesChart();
 
     }, (error) => { console.error(error); })
   }
 
   // ordena los registros antes de presentarlos
-  ordenarRegistros() {
-    this.registrosFull.sort(function (a, b) {
-      a = new Date(a.fechaPublicacion);
-      b = new Date(b.fechaPublicacion);
-      return a > b ? -1 : a < b ? 1 : 0;
-    });
+  ordenarRegistros(registros: any, orden: string) {
+    if(orden == 'ascendente'){
+      console.log("ASC to graph");
+      registros.sort(function (a, b) {
+        a = new Date(a.fechaPublicacion);
+        b = new Date(b.fechaPublicacion);
+        return a < b ? -1 : a > b ? 1 : 0;
+      });
+    }else if(orden == 'descendente'){
+      console.log("DESC to history");
+      registros.sort(function (a, b) {
+        a = new Date(a.fechaPublicacion);
+        b = new Date(b.fechaPublicacion);
+        return a > b ? -1 : a < b ? 1 : 0;
+      });
+    }
+    
   }
 
 
@@ -138,11 +158,21 @@ export class HistoriaPage {
   }
 
   capturarRegistros() {
+    // to  history
+    this.ordenarRegistros(this.registrosFull, 'descendente');
     for (let registro of this.registrosFull) {
       //console.log('Valor: ' + registro.valor + ', Fecha: ' + registro.fechaPublicacion);
       this.listaFechasRegistro.push(registro.fechaPublicacion);
       this.listaValoresRegistro.push(parseFloat(registro.valor));
     }
+
+    // to graph
+    this.ordenarRegistros(this.registrosFull, 'ascendente');
+    for (let registro of this.registrosFull) {
+      this.listaFechasRegistroASC.push(registro.fechaPublicacion);
+      this.listaValoresRegistroASC.push(parseFloat(registro.valor));
+    }
+
 
   }
   /*--------------------------------END OF GRAPH HISTORY---------------------------*/

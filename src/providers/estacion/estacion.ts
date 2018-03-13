@@ -25,18 +25,13 @@ import 'rxjs/add/operator/catch';
     private urlEstaciones: string = "platform/api/public/meteorological";
     private urlDetalleEstacion: string = 'platform/api/public/meteorological/detail/';
     
-    //private urlHistoriaVariable: string = 'platform/api/variableHistoricos/detail/';
-    private urlHistoriaVariable: string = 'assets/data/data.json';
+    private urlHistoriaVariable: string = 'platform/api/variableHistoricos/detail/';
+    //private urlHistoriaVariable: string = 'assets/data/data.json';
     
 
     constructor(public http: HttpClient) {
     }
 
-    // Demo para llamara a API REST
-    getUsers() {
-      return this.http.get('https://randomuser.me/api/?results=25')
-      .do(res => console.log(res))  ;
-    }
 
     // Obtiene el detalle de las estación por {codigo}
     getDetalleEstacion(codigo: string){
@@ -45,18 +40,17 @@ import 'rxjs/add/operator/catch';
     }
 
     getHistoriaVariable(codEstacion: string, codVariable: string){
-     /*return this.http.get(this.urlHistoriaVariable + codEstacion + '/' +
-       codVariable)
-     .do(res => console.log(res)); */
-     return this.http.get(this.urlHistoriaVariable);
+     
+     return this.http.get(this.urlHistoriaVariable + codEstacion + '/' +
+       codVariable);
+
+      //return this.http.get(this.urlHistoriaVariable);
     }
 
     
 
     // Obtiene todas las estaciones del API REST
     getEstaciones() {
-      return this.http.get(this.urlEstaciones)
-      .do(res => console.log(res));
-
+      return this.http.get(this.urlEstaciones);
     }
   }

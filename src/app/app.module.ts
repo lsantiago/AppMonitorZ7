@@ -30,6 +30,7 @@ import { StompService } from 'ng2-stomp-service';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { FIREBASE_CONFIG } from './app.firebase.config';
+import { UserProvider } from '../providers/user/user';
 
 
 
@@ -77,7 +78,8 @@ import { FIREBASE_CONFIG } from './app.firebase.config';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     EstacionProvider,
-    StompService
+    StompService,
+    UserProvider
   ]
 })
 export class AppModule {}

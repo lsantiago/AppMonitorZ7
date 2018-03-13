@@ -13,38 +13,37 @@ import { PosicionEstacionPage } from '../posicion-estacion/posicion-estacion';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  
+
   private estaciones: any = [];
   private searchQuery: string = '';
   private items: any = [];
 
   constructor(public navCtrl: NavController, public estacionService: EstacionProvider,
-  public changeDetectorRef: ChangeDetectorRef) {
-    
+    public changeDetectorRef: ChangeDetectorRef) {
+
   }
 
   ionViewDidLoad() {
-    this.getEstaciones();
+    this.extraerEstaciones();
   }
 
-  initializeItems(){
+  initializeItems() {
     this.items = this.estaciones;
   }
 
   // Envía el código de la estación a EstacionPage
-  showEstacion(codigoEstacion){
-    this.navCtrl.push(EstacionPage, {codigoEstacion})
+  showEstacion(codigoEstacion) {
+    this.navCtrl.push(EstacionPage, { codigoEstacion })
   }
 
-  // Ubica a la estación en mapa
-  ubicarEstacion(nombre, latitud, longitud, slidingItem: any){
+  // Ubica a la estación en el mapa
+  ubicarEstacion(nombre, latitud, longitud, slidingItem: ItemSliding) {
     slidingItem.close();
-    this.navCtrl.push(PosicionEstacionPage, {nombre, latitud, longitud});
-    
+    this.navCtrl.push(PosicionEstacionPage, { nombre, latitud, longitud });
   }
 
-  // Obtiene la lista de estaciones
-  getEstaciones() {
+  // Extrae la lista de estaciones
+  extraerEstaciones() {
     this.estacionService.getEstaciones()
       .subscribe(
       (data) => { // Success
@@ -73,18 +72,19 @@ export class HomePage {
     // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
 
-        if (val && val.trim() != '') {
-          this.items = this.items.filter((item) => {
+      if (val && val.trim() != '') {
+        this.items = this.items.filter((item) => {
           return (item.nombre.toLowerCase().indexOf(val.toLowerCase()) > -1);
-          })
-        }
+        })
+      }
 
-      
-      
+
+
     }
   }
 
-  ionChange(){
+  ionChange() {
     this.changeDetectorRef.detectChanges();
   }
 }
+
