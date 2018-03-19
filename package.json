@@ -28,7 +28,7 @@
     "@types/plotly.js": "^1.28.10",
     "angular2-highcharts": "^0.5.5",
     "angularfire2": "^5.0.0-rc.4",
-    "cordova-android": "6.3.0",
+    "cordova-android": "^6.4.0",
     "cordova-browser": "5.0.1",
     "cordova-plugin-device": "^1.1.4",
     "cordova-plugin-googlemaps": "^2.1.1",

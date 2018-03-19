@@ -36,6 +36,9 @@ export class ChartlivePage {
         animation: Highcharts.svg, // don't animate in old IE
         marginRight: 30
       },
+      time: {
+        timezone: 'America/Bogota'
+      },
       title: {
         text: 'Live Sensor data'
       },
@@ -127,7 +130,7 @@ export class ChartlivePage {
       
       //subscribe
       this.subscription = this.stomp.subscribe('/topic/plataforma.sensor.#', this.response);
-
+ 
     });
     
   }

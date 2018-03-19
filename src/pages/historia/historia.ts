@@ -139,6 +139,8 @@ export class HistoriaPage {
       loading.dismiss();
 
     }, (error) => { console.error(error); })
+
+
   }
 
   // ordena los registros antes de presentarlos
