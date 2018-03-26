@@ -32,6 +32,7 @@ import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { FIREBASE_CONFIG } from './app.firebase.config';
 import { UserProvider } from '../providers/user/user';
 
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 
 @NgModule({
@@ -79,7 +80,8 @@ import { UserProvider } from '../providers/user/user';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     EstacionProvider,
     StompService,
-    UserProvider
+    UserProvider,
+    ScreenOrientation
   ]
 })
 export class AppModule {}

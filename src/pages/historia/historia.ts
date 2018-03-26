@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { EstacionProvider } from '../../providers/estacion/estacion';
+import {ScreenOrientation} from "@ionic-native/screen-orientation";
+
 
 import { StompService } from 'ng2-stomp-service';
 //import moment from 'moment';
@@ -47,8 +49,8 @@ export class HistoriaPage {
   private listaFechasRegistroASC: any = [];
   private listaValoresRegistroASC: Array<number> = [];
 
-
-  
+  // orientación de la pantalla
+  //private screenOrientation: ScreenOrientation;
 
 
 
@@ -97,13 +99,17 @@ export class HistoriaPage {
     public estacionService: EstacionProvider,
     public toastCtrl: ToastController,
     public stomp: StompService,
-    private loadingCtrl: LoadingController) {
+    private loadingCtrl: LoadingController,
+    private screenOrientation: ScreenOrientation) {
+
+    // cambio de orientación de pantalla
+    console.log('Orientación de la pantalla: ' + this.screenOrientation.type);
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HistoriaPage');
-
   }
 
   ngOnInit() {
@@ -111,6 +117,7 @@ export class HistoriaPage {
       content: 'Descargando datos.'
     });
 
+    //this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
 
     this.codigoEstacion = this.navParams.get('codigoEstacion');
     this.codigoVariable = this.navParams.get('codigoVariable');

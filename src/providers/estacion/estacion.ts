@@ -1,6 +1,7 @@
 import { HttpClient} from '@angular/common/http';
 //import { Http, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
+import { Platform } from 'ionic-angular';
 
 
 import 'rxjs/add/operator/do';
@@ -18,18 +19,27 @@ import 'rxjs/add/operator/catch';
   */
   @Injectable()
   export class EstacionProvider {
+
+    basepath = 'platform';
     
     // recurso global, se actualiza en home.ts
     listaEstaciones: any = []
     
-    private urlEstaciones: string = "platform/api/public/meteorological";
-    private urlDetalleEstacion: string = 'platform/api/public/meteorological/detail/';
+    private urlEstaciones: string;
+    private urlDetalleEstacion: string;
     
-    private urlHistoriaVariable: string = 'platform/api/variableHistoricos/detail/';
+    private urlHistoriaVariable: string;
     //private urlHistoriaVariable: string = 'assets/data/data.json';
     
 
-    constructor(public http: HttpClient) {
+    constructor(public http: HttpClient, public platform: Platform) {
+      if(this.platform.is('cordova')){
+        this.basepath = 'http://200.0.29.38:8080/platform';
+      }
+
+      this.urlEstaciones = this.basepath + "/api/public/meteorological";
+      this.urlDetalleEstacion = this.basepath +'/api/public/meteorological/detail/';
+      this.urlHistoriaVariable = this.basepath +'/api/variableHistoricos/detail/';
     }
 
 
